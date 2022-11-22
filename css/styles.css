@@ -236,19 +236,19 @@ img {
 }
 
 .btn-hero {
+  margin: 0 auto;
+  padding: 10px 32px;
+  display: flex;
+  align-items: center;
   font-family: inherit;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.875;
-  display: flex;
   text-align: center;
   letter-spacing: 0.06em;
-  align-items: center;
   color: var(--btn-text-color);
   background-color: var(--accent-color);
   box-shadow: var(--btn-hero-shadow);
-  margin: 0 auto;
-  padding: 10px 32px;
   transition: background-color 250ms var(--cubic);
 }
 
@@ -666,8 +666,15 @@ img {
   top: 0;
   width: 100%;
   height: 100%;
+  opacity: 1;
   background-color: rgba(0, 0, 0, 0.2);
   transition: opacity 250ms var(--cubic), visibility 250ms var(--cubic);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .modal {
@@ -700,10 +707,4 @@ img {
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-}
-
-.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
 }
