@@ -29,8 +29,12 @@
   --projects-card-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
     0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
   --btn-hero-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  --time: 250ms;
   --cubic: cubic-bezier(0.4, 0, 0.2, 1);
+  --modal-bg-color: #ffffff;
+  --project-overlay-color: #ffffff;
+  --modal-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  --overlay-bg-color: rgba(33, 150, 243, 0.9);
 }
 
 body {
@@ -85,11 +89,9 @@ a {
   padding-left: 15px;
   padding-right: 15px;
   margin: 0 auto;
-  align-items: center;
 }
 
 .button {
-  display: block;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -172,6 +174,7 @@ img {
   color: var(--accent-color);
 }
 
+.link-nav::after,
 .link-nav.current::after {
   position: absolute;
   content: "";
@@ -180,8 +183,17 @@ img {
   display: flex;
   left: 0;
   bottom: -1px;
-  background-color: #2196f3;
+  background-color: var(--accent-color);
   border-radius: 2px;
+
+  transform: scaleX(0);
+  transition: transform 250ms var(--cubic);
+}
+
+.link-nav:hover::after,
+.link-nav:focus::after,
+.link-nav.current::after {
+  transform: scaleX(1);
 }
 
 .info-link {
@@ -222,29 +234,32 @@ img {
   background-position: center;
 }
 
+.hero-wrap {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
 .title-hero {
   width: 696px;
   font-weight: 900;
   font-size: 44px;
   line-height: 1.3636;
-  text-align: center;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--hero-title-color);
-  margin: 0 auto;
   margin-bottom: 30px;
 }
 
 .btn-hero {
   margin: 0 auto;
   padding: 10px 32px;
-  display: flex;
-  align-items: center;
   font-family: inherit;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.875;
-  text-align: center;
   letter-spacing: 0.06em;
   color: var(--btn-text-color);
   background-color: var(--accent-color);
@@ -318,13 +333,19 @@ img {
   position: relative;
 }
 
-.activity-item-title {
+.activity-item-wrap {
   position: absolute;
   right: 0;
   bottom: 0;
   width: 100%;
   height: 70px;
-  padding: 27px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
+.activity-item-title {
   font-weight: 700;
   font-size: 14px;
   line-height: calc(16 / 14);
@@ -332,7 +353,6 @@ img {
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #ffffff;
-  background-color: rgba(47, 48, 58, 0.8);
 }
 
 /* секція команда */
@@ -478,6 +498,7 @@ img {
 }
 
 .filter-btn {
+  display: block;
   font-family: inherit;
   font-weight: 500;
   font-size: 16px;
@@ -521,10 +542,6 @@ img {
   box-shadow: var(--projects-card-shadow);
 }
 
-.project-link:hover .project-text {
-  transform: translateY(0);
-}
-
 .project-wrap {
   position: relative;
   overflow: hidden;
@@ -533,15 +550,22 @@ img {
 .project-text {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   padding: 63px 24px;
   font-size: 18px;
   line-height: calc(28 / 18);
   letter-spacing: 0.03em;
-  color: #ffffff;
-  background-color: rgba(33, 150, 243, 0.9);
+  color: var(--project-overlay-color);
+  background-color: var(--overlay-bg-color);
   transform: translateY(100%);
   transition: transform 250ms var(--cubic);
+}
+
+.project-link:hover .project-text,
+.project-link:focus .project-text {
+  transform: translateY(0);
 }
 
 .card-content {
@@ -555,7 +579,6 @@ img {
   line-height: 2;
   letter-spacing: 0.06em;
   color: var(--secondary-text-color);
-
   margin-bottom: 4px;
 }
 
@@ -683,10 +706,9 @@ img {
   left: 50%;
   width: 528px;
   min-height: 581px;
-  background-color: #ffffff;
+  background-color: var(--modal-bg-color);
   border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
-    0px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--modal-shadow);
   transform: translate(-50%, -50%) scale(1);
   transition: transform 250ms var(--cubic);
 }
@@ -704,7 +726,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: var(--modal-bg-color);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
 }
